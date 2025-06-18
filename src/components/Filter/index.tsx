@@ -1,8 +1,10 @@
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-import { styles } from './styles';
 import { StatusIcon } from '@/components/StatusIcon';
+
 import { FilterStatus } from '@/types/FilterStatus';
+
+import { styles } from './styles';
 
 type FilterProps = TouchableOpacityProps & {
   status: FilterStatus;

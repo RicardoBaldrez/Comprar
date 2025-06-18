@@ -1,11 +1,14 @@
 import { View, Image } from 'react-native';
 
-import { styles } from './styles';
 import logo from '@/assets/logo.png';
+
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
 import { Input } from '@/components/Input';
+
 import { FilterStatus } from '@/types/FilterStatus';
+
+import { styles } from './styles';
 
 export default function App() {
   return (

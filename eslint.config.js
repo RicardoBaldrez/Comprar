@@ -3,6 +3,7 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
+import importHelpersPlugin from 'eslint-plugin-import-helpers';
 
 export default [
   js.configs.recommended,
@@ -20,26 +21,26 @@ export default [
       '@typescript-eslint': typescript,
       import: importPlugin,
       prettier: prettierPlugin,
+      'import-helpers': importHelpersPlugin,
     },
     rules: {
-      // TypeScript recommended rules
       ...typescript.configs.recommended.rules,
-      // Import order
-      'import/order': [
+      'import-helpers/order-imports': [
         'error',
         {
+          newlinesBetween: 'always',
           groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
+            '/^react/',
+            'module',
+            '/^@\\/assets/',
+            '/^@\\/components/',
+            '/^@\\/types/',
+            '/^@\\//',
+            ['parent', 'sibling', 'index'],
           ],
-          alphabetize: { order: 'asc', caseInsensitive: true },
+          alphabetize: { order: 'asc', ignoreCase: true },
         },
       ],
-      // Prettier
       'prettier/prettier': 'error',
     },
   },
