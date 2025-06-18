@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    paddingTop: 24,
+    padding: 24,
     marginTop: 24,
   },
 });
