@@ -9,8 +9,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
-      <Input placeholder="O que você comprar?" />
-      <Button title="Entrar" />
+      <View style={styles.form}>
+        <Input placeholder="O que você comprar?" />
+        <Button title="Entrar" />
+      </View>
+      <View style={styles.content}></View>
     </View>
   );
 }
