@@ -42,4 +42,18 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: '#828282',
   },
+  separator: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "#eef0f5",
+    marginVertical: 16
+  },
+  listContent: {
+    paddingTop: 24
+  },
+  empty: {
+    fontSize: 14,
+    color: "#808080",
+    textAlign: "center"
+  }
 });
