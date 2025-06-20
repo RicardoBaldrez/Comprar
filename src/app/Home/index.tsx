@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList, Alert } from 'react-native';
 
 import logo from '@/assets/logo.png';
 
@@ -14,27 +14,25 @@ import { styles } from './styles';
 import { useState } from 'react';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
-const ITEMS = [
-  {
-    id: "1",
-    description: "2 pacotes de café",
-    status: FilterStatus.PENDING,
-  },
-  {
-    id: "2",
-    description: "1 pacote de arroz",
-    status: FilterStatus.DONE,
-  },
-  {
-    id: "3",
-    description: "1 regrigerante",
-    status: FilterStatus.PENDING,
-  },
-]
 
 export default function App() {
   const [description, setDescription] = useState("");
   const [filterValue, setFilterValue] = useState(FilterStatus.DONE);
+  const [items, setItems] = useState<any>([]);
+
+  function handleAddItem() {
+    if (!description.trim()) {
+      console.log("Não tem nada!!!");
+      return Alert.alert("Adicionar", "Informe a descrição para adicionar.")
+    }
+
+    const newItem = {
+      id: Math.random().toString(36).substring(2),
+      description,
+      status: FilterStatus.PENDING
+    }
+    setItems((prevState: any) => [...prevState, newItem])
+  }
 
   return (
     <View style={styles.container}>
@@ -44,7 +42,7 @@ export default function App() {
           onChangeText={setDescription}
           placeholder="O que você comprar?"
         />
-        <Button title="Entrar" />
+        <Button title="Adicionar" onPress={handleAddItem} />
       </View>
       <View style={styles.content}>
         <View style={styles.header}>
@@ -61,7 +59,7 @@ export default function App() {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={ITEMS}
+          data={items}
           keyExtractor={({ id }) => id}
           renderItem={({ item }) => (
             <ListItem
