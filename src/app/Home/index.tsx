@@ -33,14 +33,17 @@ const ITEMS = [
 ]
 
 export default function App() {
+  const [description, setDescription] = useState("");
   const [filterValue, setFilterValue] = useState(FilterStatus.DONE);
-  let name = "";
 
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <View style={styles.form}>
-        <Input placeholder="O que você comprar?" />
+        <Input
+          onChangeText={setDescription}
+          placeholder="O que você comprar?"
+        />
         <Button title="Entrar" />
       </View>
       <View style={styles.content}>
