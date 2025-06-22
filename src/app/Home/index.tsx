@@ -22,11 +22,11 @@ import { itemsStorage, ItemStorageType } from '@/storage/itemsStorage';
 
 import { styles } from './styles';
 
-const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
+const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
 
 export default function App() {
   const [description, setDescription] = useState('');
-  const [filterValue, setFilterValue] = useState(FilterStatus.DONE);
+  const [filterValue, setFilterValue] = useState(FilterStatus.PENDING);
   const [items, setItems] = useState<ItemStorageType[]>([]);
 
   async function handleAddItem() {
@@ -42,22 +42,22 @@ export default function App() {
     };
 
     await itemsStorage.add(newItem);
-    await getItems();
+    await itemsByStatus();
   }
 
-  async function getItems() {
+  async function itemsByStatus() {
     try {
-      const response = await itemsStorage.get();
+      const response = await itemsStorage.getByStatus(filterValue);
       setItems(response);
     } catch (error) {
-      console.log('🚀 ~ getItems ~ error:', error);
+      console.log('🚀 ~ itemsByStatus ~ error:', error);
       Alert.alert('Erro', 'Não foi possível filtrar os itens.');
     }
   }
 
   useEffect(() => {
-    getItems();
-  }, []);
+    itemsByStatus();
+  }, [filterValue]);
 
   return (
     <View style={styles.container}>
