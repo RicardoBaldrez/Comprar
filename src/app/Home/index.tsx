@@ -1,5 +1,13 @@
 /* eslint-disable no-undef */
-import { View, Image, Text, TouchableOpacity, FlatList, Alert } from 'react-native';
+import { useEffect, useState } from 'react';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+} from 'react-native';
 
 import logo from '@/assets/logo.png';
 
@@ -10,29 +18,46 @@ import { ListItem } from '@/components/ListItem ';
 
 import { FilterStatus } from '@/types/FilterStatus';
 
+import { itemsStorage, ItemStorageType } from '@/storage/itemsStorage';
+
 import { styles } from './styles';
-import { useState } from 'react';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
 
 export default function App() {
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [filterValue, setFilterValue] = useState(FilterStatus.DONE);
-  const [items, setItems] = useState<any>([]);
+  const [items, setItems] = useState<ItemStorageType[]>([]);
 
-  function handleAddItem() {
+  async function handleAddItem() {
     if (!description.trim()) {
-      console.log("Não tem nada!!!");
-      return Alert.alert("Adicionar", "Informe a descrição para adicionar.")
+      console.log('Não tem nada!!!');
+      return Alert.alert('Adicionar', 'Informe a descrição para adicionar.');
     }
 
     const newItem = {
       id: Math.random().toString(36).substring(2),
       description,
-      status: FilterStatus.PENDING
-    }
-    setItems((prevState: any) => [...prevState, newItem])
+      status: FilterStatus.PENDING,
+    };
+
+    await itemsStorage.add(newItem);
+    await getItems();
   }
+
+  async function getItems() {
+    try {
+      const response = await itemsStorage.get();
+      setItems(response);
+    } catch (error) {
+      console.log('🚀 ~ getItems ~ error:', error);
+      Alert.alert('Erro', 'Não foi possível filtrar os itens.');
+    }
+  }
+
+  useEffect(() => {
+    getItems();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -71,7 +96,9 @@ export default function App() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listContent}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          ListEmptyComponent={() => <Text style={styles.empty}>Nenhum item aqui.</Text>}
+          ListEmptyComponent={() => (
+            <Text style={styles.empty}>Nenhum item aqui.</Text>
+          )}
         />
       </View>
     </View>
