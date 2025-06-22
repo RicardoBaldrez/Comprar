@@ -1,36 +1,37 @@
 {
-	"name": "comprar",
-	"version": "1.0.0",
-	"main": "index.ts",
-	"type": "module",
-	"scripts": {
-		"start": "expo start",
-		"android": "expo start --android",
-		"ios": "expo start --ios",
-		"web": "expo start --web",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
-	},
-	"dependencies": {
-		"@expo/metro-runtime": "~5.0.4",
-		"expo": "~53.0.11",
-		"expo-status-bar": "~2.2.3",
-		"lucide-react-native": "^0.517.0",
-		"react": "19.0.0",
-		"react-dom": "19.0.0",
-		"react-native": "0.79.3",
-		"react-native-svg": "15.11.2",
-		"react-native-web": "^0.20.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.25.2",
-		"@types/react": "~19.0.10",
-		"eslint": "^9.29.0",
-		"eslint-config-expo": "^9.2.0",
-		"eslint-plugin-import": "^2.31.0",
-		"eslint-plugin-import-helpers": "^2.0.1",
-		"eslint-plugin-prettier": "^5.5.0",
-		"prettier": "^3.5.3",
-		"typescript": "~5.8.3"
-	},
-	"private": true
+  "name": "comprar",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~5.0.4",
+    "expo": "~53.0.11",
+    "expo-status-bar": "~2.2.3",
+    "lucide-react-native": "^0.517.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.3",
+    "react-native-svg": "15.11.2",
+    "react-native-web": "^0.20.0",
+    "@react-native-async-storage/async-storage": "2.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/react": "~19.0.10",
+    "eslint": "^9.29.0",
+    "eslint-config-expo": "^9.2.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-import-helpers": "^2.0.1",
+    "eslint-plugin-prettier": "^5.5.0",
+    "prettier": "^3.5.3",
+    "typescript": "~5.8.3"
+  },
+  "private": true
 }
