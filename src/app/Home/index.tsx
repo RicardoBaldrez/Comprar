@@ -43,6 +43,11 @@ export default function App() {
 
     await itemsStorage.add(newItem);
     await itemsByStatus();
+
+    Alert.alert("Adicionado", `${description} adicionado com sucesso`);
+
+    setDescription('');
+    setFilterValue(FilterStatus.PENDING);
   }
 
   async function itemsByStatus() {
@@ -64,6 +69,7 @@ export default function App() {
       <Image source={logo} style={styles.logo} />
       <View style={styles.form}>
         <Input
+          value={description}
           onChangeText={setDescription}
           placeholder="O que você comprar?"
         />
