@@ -60,6 +60,16 @@ export default function App() {
     }
   }
 
+  async function handleRemove(id: string) {
+    try {
+      await itemsStorage.remove(id);
+      await itemsByStatus();
+    } catch (error) {
+      console.log("🚀 ~ handleRemove ~ error:", error)
+      Alert.alert("Remover", "Não foi possível remover.")
+    }
+  }
+
   useEffect(() => {
     itemsByStatus();
   }, [filterValue]);
@@ -96,7 +106,7 @@ export default function App() {
             <ListItem
               data={item}
               onStatus={() => console.log('Status changing ...')}
-              onRemove={() => console.log('Removing ...')}
+              onRemove={() => handleRemove(item.id)}
             />
           )}
           showsVerticalScrollIndicator={false}
