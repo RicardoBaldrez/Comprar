@@ -61,6 +61,13 @@ export default function App() {
   }
 
   async function handleRemove(id: string) {
+    Alert.alert('Remover', 'Deseja remover o item?', [
+      { text: 'Não', style: 'cancel' },
+      { text: 'Sim', onPress: () => onRemove(id) }
+    ]);
+  }
+
+  async function onRemove(id: string) {
     try {
       await itemsStorage.remove(id);
       await itemsByStatus();
